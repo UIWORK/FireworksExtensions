@@ -1,4 +1,4 @@
 Fireworks Extensions
 ===================
 
-All for Adobe Fireworks
+Extensions for Adobe Fireworks
