@@ -1,0 +1,144 @@
+if (fw.documents.length > 0)
+ {
+ // check only one element selected
+ if (fw.selection.length == 1)
+  {
+  var selType = fw.selection[0].toString();
+
+  // check object is text object
+  if(selType == "[object Text]")
+   {
+   createIMG();
+   }
+  else
+   {
+   alert("The selected object is not a text object. Please try again.")
+   }
+  }
+ else
+  {
+  alert("You must have a single object selected.");
+  }
+ }
+else
+ {
+ alert("There are no open documents")
+ }
+
+function createIMG()
+{
+// set variables
+var textBandName = new Array();
+var textFileName = new Array();
+var textBite = 1;
+var textLook, textFile;
+var imgStore, rootName;
+var i = 0;
+var textLoop = true;
+var splitCheck;
+var textBiteBand;
+var textBiteFile;
+var arraylength = 0
+
+// find text file and put text into array
+alert("Browse for the .txt file containing your replacement text.");
+textLook = fw.browseForFileURL();
+if (textLook != null)
+ {
+ textFile = Files.open(textLook,false);
+
+ // select the folder for the output files
+ alert("Browse to the folder where the images should be placed");
+ imgStore = fw.browseForFolderURL();
+
+ if (imgStore != null)
+  {
+
+  // select a root name for the files
+  rootName = prompt("Enter the root name for your files:");
+
+  if (rootName != null)
+   {
+
+   while(textBite != null)
+    {
+    textBite = textFile.readline();
+    if (textBite != null)
+     {
+     splitCheck = textBite.indexOf(",");
+     textBiteFile = textBite.substring(0,splitCheck);
+     textBiteBand = textBite.substring(splitCheck+2);
+     textBandName[i] = textBiteBand;
+     textFileName[i] = textBiteFile;
+     arraylength = arraylength+1
+     i++;
+     }
+    }
+
+   textFile.close();
+
+   alert(textBiteBand.length);
+   alert(arraylength);
+
+   // for each text item in array
+   for (var k = 0; k < arraylength; k++)
+    {
+    // change text attributes
+
+    fw.getDocumentDOM().setTextRuns({textRuns:[ { changedAttrs:{  },
+characters:textBandName[k] } ] });
+
+
+// fw.exportDocumentAs (theDOM, expURL, [options]);
+
+
+sourceFormat_GIF = {
+	applyScale: false,
+	colorMode: "24 bit",
+	exportFormat: "JPEG",
+	jpegQuality: 80,
+	jpegSmoothness: 0,
+	jpegSubsampling: 0,
+	name: "JPEG - Better Quality",
+	numEntriesRequested: 0,
+	percentScale: 100,
+	useScale: true,
+	xSize: 0,
+	ySize: 0
+};
+
+
+sourceFormat_JPG = {
+	applyScale: false,
+	colorMode: "indexed",
+	exportFormat: "GIF",
+	jpegQuality: 80,
+	jpegSmoothness: 0,
+	jpegSubsampling: 1,
+	name: "GIF WebSnap 128",
+	numEntriesRequested: 128,
+	percentScale: 100,
+	useScale: true,
+	xSize: 0,
+	ySize: 0
+};
+
+// fw.exportDocumentAs (theDOM, expURL, sourceFormat);
+
+
+    // export gif
+    var fileName = imgStore + "/" + textFileName[k] + ".gif";
+    fw.exportDocumentAs(null,fileName,sourceFormat);
+    }
+   }
+  else
+   {
+   textFile.close();
+   }
+  }
+ else
+  {
+  textFile.close();
+  }
+ }
+}
