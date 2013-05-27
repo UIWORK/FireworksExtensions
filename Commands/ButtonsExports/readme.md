@@ -10,8 +10,7 @@ in the sourceFormat function.
 
 * Create a text file named export.txt
 * Format the data like this:
-  [buttonfilename], [buttonText]  
-  (see sample)
+  [buttonfilename], [buttonText]
 * Open you png button template
 * Select the text field that will change for each button
 * Run the script
