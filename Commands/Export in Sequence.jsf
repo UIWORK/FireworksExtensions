@@ -1,0 +1,14 @@
+var dom = fw.getDocumentDOM();
+var j = dom.layers[0].elems.length;
+var expath = fw.browseForFolderURL(); //File selection dialog
+var exop = dom.exportOptions;
+var ext = "." + exop.exportFormat.toLowerCase();
+var fpath = fw.getDocumentDOM().filePathForRevert;
+var docName = fpath.slice(fpath.lastIndexOf("/") + 1, fpath.lastIndexOf("."))
+//Show what you write out, hide the rest.
+for (i = 0; i < j; i++) {
+    fw.getDocumentDOM().setElementVisible(-1, -1, -1, false);
+    fw.getDocumentDOM().setElementVisible(-1, 0, i, true);
+    dom.exportTo(expath + "/" + docName + i + ext, exop) === true ? true : alert("export failed.")
+}
+fw.getDocumentDOM().setElementVisible(-1, -1, -1, true);
