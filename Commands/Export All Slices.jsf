@@ -1,0 +1,27 @@
+// ===========================================================================
+//
+//  Export All Slices.jsf
+//
+//  Copyright 2003 John Dunning.  All rights reserved.
+//
+//  fireworks@johndunning.com	http://johndunning.com/fireworks/
+//
+//  version 1.0.0 - 2/27/2003 8:40 PM
+//
+// ===========================================================================
+
+
+// ===========================================================================
+//  Main
+// ===========================================================================
+
+main();
+
+function main()
+{
+	var exportPath = fw.browseForFileURL("save", "");
+
+	if (exportPath) {
+		fw.exportHtmlAndImages(null, null, exportPath);
+	}
+}
