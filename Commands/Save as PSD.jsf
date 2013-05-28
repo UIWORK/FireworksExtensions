@@ -1,0 +1,28 @@
+var doc = fw.getDocumentDOM();
+var loc = fw.browseForFolderURL("select a folder to save pages");
+
+var prevWarn = fw.getPref("PsdExport_Warn100"); // bool 
+fw.setPref("PsdExport_Warn100", false);    // don't warn. 
+
+var kObjToLayer = 1; 
+var kFlatten = 2; 
+var prevLayers = fw.getPref("PsdExport_Layers"); 
+fw.setPref("PsdExport_Layers", kObjToLayer);    // flatten layers or not. 
+
+var kEffectEditable = 1; 
+var kEffectRender = 2; 
+var prevEffects = fw.getPref("PsdExport_Effects"); 
+fw.setPref("PsdExport_Effects", kEffectEditable); 
+
+var kTextEditable = 1; 
+var kTextRender = 2; 
+var prevText = fw.getPref("PsdExport_Text"); 
+fw.setPref("PsdExport_Text", kTextRender); 
+
+if(loc) fw.exportPSD(doc, loc+"/yourPages.psd"); 
+
+// Put the prefs back. 
+fw.setPref("PsdExport_Warn100", prevWarn); 
+fw.setPref("PsdExport_Layers", prevLayers); 
+fw.setPref("PsdExport_Effects", prevEffects); 
+fw.setPref("PsdExport_Text", prevText);
