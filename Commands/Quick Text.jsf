@@ -1,0 +1,36 @@
+// Fireworks Javascript Command
+// Title: Quick Text
+// Author: Christian Magill (http://www.christianmagill.com)
+// Description: Make multiple text objects really fast. Great for menus. Type your menu items as inputs. Hit cancel when you are finished. Then easily space with align panel. Add new text routine modified from commands by Aaron Beall.
+
+var dom = fw.getDocumentDOM(); // document object
+
+function QuickText(){
+
+  if(!dom) 
+  	return false;
+  
+  var input = '';
+  
+  var count = 0;
+  
+  do{
+  	if(input){
+		count++;
+		dom.addNewText({left:dom.left + dom.width/4, top:dom.top + dom.height/8, right:dom.left + 3*dom.width/4, bottom:dom.top + dom.height/8}, false);
+		dom.setTextAutoExpand(true);
+		var runs = fw.selection[0].textRuns;
+		runs.textRuns = [{changedAttrs: {}, characters: input}];
+		fw.selection[0].textRuns = runs;
+		for(var lcv = count; lcv > 0; lcv--)
+			dom.arrange("backward");
+		
+	}
+  	input = prompt('Enter text');	
+  }while(input);
+  
+}
+
+try{
+	QuickText();
+}catch(e){ alert([e, e.lineNumber, e.fileName].join("\n")) };
