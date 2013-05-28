@@ -65,7 +65,7 @@ function createIMG() {
                         }]
                     });
                     // fw.exportDocumentAs (theDOM, expURL, [options]);
-                    sourceFormat_GIF = {
+                    sourceFormat_JPG = {
                         applyScale: false,
                         colorMode: "24 bit",
                         exportFormat: "JPEG",
@@ -79,7 +79,7 @@ function createIMG() {
                         xSize: 0,
                         ySize: 0
                     };
-                    sourceFormat_JPG = {
+                    sourceFormat_GIF = {
                         applyScale: false,
                         colorMode: "indexed",
                         exportFormat: "GIF",
@@ -96,7 +96,7 @@ function createIMG() {
                     // fw.exportDocumentAs (theDOM, expURL, sourceFormat);
                     // export gif
                     var fileName = imgStore + "/" + textFileName[k] + ".gif";
-                    fw.exportDocumentAs(null, fileName, sourceFormat);
+                    fw.exportDocumentAs(null, fileName, sourceFormat_JPG);
                 }
             } else {
                 textFile.close();
